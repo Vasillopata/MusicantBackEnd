@@ -18,6 +18,13 @@ namespace MusicantBackEnd.Controllers
             _db = db;
         }
 
+        [HttpGet("getUserNameById")]
+        public async Task<IActionResult> GetUserNameById(int userId)
+        {
+            var appUser = await _db.AppUsers.FindAsync(userId);
+            if (appUser == null) { return NotFound(); }
+            return Ok(appUser.UserName);
+        }
 
         [HttpGet("getUserName")]
         public async Task<IActionResult> GetUserName()

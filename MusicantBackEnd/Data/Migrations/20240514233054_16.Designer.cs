@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MusicantBackEnd.Data;
 
@@ -11,9 +12,11 @@ using MusicantBackEnd.Data;
 namespace MusicantBackEnd.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240514233054_16")]
+    partial class _16
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -265,7 +268,7 @@ namespace MusicantBackEnd.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Comments", (string)null);
+                    b.ToTable("Comments");
                 });
 
             modelBuilder.Entity("MusicantBackEnd.Models.Community", b =>
@@ -294,7 +297,7 @@ namespace MusicantBackEnd.Data.Migrations
 
                     b.HasIndex("OwnerId");
 
-                    b.ToTable("Communities", (string)null);
+                    b.ToTable("Communities");
                 });
 
             modelBuilder.Entity("MusicantBackEnd.Models.Follow", b =>
@@ -309,7 +312,7 @@ namespace MusicantBackEnd.Data.Migrations
 
                     b.HasIndex("FollowerId");
 
-                    b.ToTable("Follows", (string)null);
+                    b.ToTable("Follows");
                 });
 
             modelBuilder.Entity("MusicantBackEnd.Models.Like", b =>
@@ -324,7 +327,7 @@ namespace MusicantBackEnd.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Likes", (string)null);
+                    b.ToTable("Likes");
                 });
 
             modelBuilder.Entity("MusicantBackEnd.Models.Moderator", b =>
@@ -347,7 +350,7 @@ namespace MusicantBackEnd.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Moderators", (string)null);
+                    b.ToTable("Moderators");
                 });
 
             modelBuilder.Entity("MusicantBackEnd.Models.Post", b =>
@@ -380,7 +383,7 @@ namespace MusicantBackEnd.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Posts", (string)null);
+                    b.ToTable("Posts");
                 });
 
             modelBuilder.Entity("MusicantBackEnd.Models.Save", b =>
@@ -395,7 +398,7 @@ namespace MusicantBackEnd.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Saves", (string)null);
+                    b.ToTable("Saves");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>

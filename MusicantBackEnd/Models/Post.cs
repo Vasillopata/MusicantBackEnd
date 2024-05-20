@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace MusicantBackEnd.Models
 {
@@ -10,8 +11,8 @@ namespace MusicantBackEnd.Models
         public string? Text { get; set; }
         public byte[]? Image { get; set; }
         [Required] public int UserId { get; set; }
-        [ForeignKey("UserId")] public virtual AppUser User { get; set; }
+        [ForeignKey("UserId")][JsonIgnore] public virtual AppUser User { get; set; }
         public int? CommunityId { get; set; }
-        [ForeignKey("CommunityId")] public virtual Community? Community { get; set; }
+        [ForeignKey("CommunityId")][JsonIgnore] public virtual Community? Community { get; set; }
     }
 }
