@@ -109,6 +109,14 @@ namespace MusicantBackEnd.Controllers
 
             return Ok();
         }
+        [HttpGet("getOwnAccount")]
+        public async Task<IActionResult> GetOwnAccount()
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null) { return BadRequest(); }
+
+            return new JsonResult(new { user });
+        }   
         [HttpGet("getAccount")]
         public async Task<IActionResult> GetAccount(int appUserId)
         {

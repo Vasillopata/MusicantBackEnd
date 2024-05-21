@@ -12,9 +12,9 @@ namespace MusicantBackEnd.Models
         [Required]
         public override string UserName { get; set; }
 
-        public string? PfpUrl {  get; set; }
+        public byte[]? Pfp {  get; set; }
 
-        public string? BannerUrl { get; set; }
+        public byte[]? Banner { get; set; }
 
         [Required]
         public DateTime CreatedDate { get; set; }

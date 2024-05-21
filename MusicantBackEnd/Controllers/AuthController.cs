@@ -32,8 +32,8 @@ namespace MusicantBackEnd.Controllers
                 Id = 0,
                 UserName = model.UserName,
                 Email = model.Email,
-                PfpUrl = null,
-                BannerUrl = null,
+                Pfp = null,
+                Banner = null,
                 CreatedDate = DateTime.UtcNow,
                 BirthDate = model.BirthDate,
             };

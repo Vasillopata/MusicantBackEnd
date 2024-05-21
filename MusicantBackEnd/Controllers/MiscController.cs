@@ -37,11 +37,24 @@ namespace MusicantBackEnd.Controllers
             var posts = await _db.Posts
                 .Where(p => p.Title.ToLower().Contains(input.ToLower()))
                 .ToListAsync();
+            var postImgs = new List<string>();
+            foreach (Post post in posts)
+            {
+                if (post.Image != null)
+                {
+                    postImgs.Add(String.Concat("data:image/jpeg;base64,", Convert.ToBase64String(post.Image)));
+                }
+                else
+                {
+                    postImgs.Add("");
+                }
+
+            }
             var communities = await _db.Communities
                 .Where(c => c.Name.ToLower().Contains(input.ToLower()))
                 .ToListAsync();
 
-            return new JsonResult(new {friends, profiles, posts, communities});
+            return new JsonResult(new {friends, profiles, posts, communities, postImgs});
         }
     }
 }

@@ -18,5 +18,6 @@ namespace MusicantBackEnd.Data
         public DbSet<Moderator> Moderators { get; set; }
         public DbSet<Post> Posts { get; set; }
         public DbSet<Save> Saves { get; set; }
+        public DbSet<Membership> Memberships { get; set; }
     }
 }

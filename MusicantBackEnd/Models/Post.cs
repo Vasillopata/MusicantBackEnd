@@ -14,5 +14,6 @@ namespace MusicantBackEnd.Models
         [ForeignKey("UserId")][JsonIgnore] public virtual AppUser User { get; set; }
         public int? CommunityId { get; set; }
         [ForeignKey("CommunityId")][JsonIgnore] public virtual Community? Community { get; set; }
+        public DateTime DatePosted { get; set; }
     }
 }

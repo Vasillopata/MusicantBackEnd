@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using MusicantBackEnd.Data;
 using MusicantBackEnd.Models;
 
@@ -34,7 +35,7 @@ namespace MusicantBackEnd.Misc
 
             }, "Parola123?").GetAwaiter().GetResult();
 
-            var user = _db.Users.FirstOrDefault(u => u.Email == "vasillopata@gmail.com");
+            var user = _db.Users.FirstOrDefaultAsync(u => u.Email == "vasillopata@gmail.com").GetAwaiter().GetResult();
             _userManager.AddToRoleAsync(user, AppRoles.Admin).GetAwaiter().GetResult();
         }
     }
