@@ -4,9 +4,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MusicantBackEnd.Models
 {
-    [Keyless]
     public class Follow
     {
+        [Key] public int Id { get; set; }
         public int? FollowerId {  get; set; }
         [ForeignKey("FollowerId")] public virtual AppUser? Follower { get; set; }
 

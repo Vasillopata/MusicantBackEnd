@@ -81,8 +81,6 @@ namespace MusicantBackEnd.Controllers
             List<int> posts = await _db.Posts
                 .Where(p => p.UserId == userId)
                 .OrderByDescending(p => p.Id)
-                .Skip(initPost - 1)
-                .Take(amount)
                 .Select(p => p.Id)
                 .ToListAsync();
 
@@ -95,8 +93,6 @@ namespace MusicantBackEnd.Controllers
             List<int> posts = await _db.Posts
                 .Where(p => p.CommunityId == communityId)
                 .OrderByDescending(p => p.Id)
-                .Skip(initPost - 1)
-                .Take(amount)
                 .Select(p => p.Id)
                 .ToListAsync();
 
@@ -355,6 +351,31 @@ namespace MusicantBackEnd.Controllers
             return new JsonResult(new { comment, repliesCount });
         }
 
+        [HttpGet("getLikedPosts")]
+        public async Task<IActionResult> GetLikedPosts()
+        {
+            var user = await _userManager.GetUserAsync(User);
 
+            List<int> likes = await _db.Likes
+                .Where(l => l.UserId == user.Id)
+                .Include(l => l.Post)
+                .Select(l => l.Post.Id)
+                .ToListAsync();
+
+            return new JsonResult(new { likes });
+        }
+        [HttpGet("getSavedPosts")]
+        public async Task<IActionResult> GetSavedPosts()
+        {
+            var user = await _userManager.GetUserAsync(User);
+
+            List<int> saves = await _db.Saves
+                .Where(l => l.UserId == user.Id)
+                .Include(l => l.Post)
+                .Select(l => l.Post.Id)
+                .ToListAsync();
+
+            return new JsonResult(new { saves });
+        }
     }
 }

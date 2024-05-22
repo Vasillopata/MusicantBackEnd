@@ -21,5 +21,6 @@ namespace MusicantBackEnd.Models
 
         [Required]
         public DateTime BirthDate { get; set; }
+        public bool IsLocked { get; set; } = false;
     }
 }

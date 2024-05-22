@@ -24,9 +24,9 @@ namespace MusicantBackEnd.Controllers
         {
            _logger.LogInformation("Search: " + input);
             var user = await _userManager.GetUserAsync(User);
-            List<AppUser> friends = await _db.Follows.Where(f => f.FollowedId == user.Id)
-                .Include(f => f.Follower)
-                .Select(f => f.Follower)
+            List<AppUser> friends = await _db.Follows.Where(f => f.FollowedId == user.Id || f.FollowerId == user.Id)
+                .Include(f => f.Followed)
+                .Select(f => f.Followed)
                 .Where(p => p.UserName.ToLower().Contains(input.ToLower()))
                 .ToListAsync();
             List<AppUser> profiles = await _db.AppUsers

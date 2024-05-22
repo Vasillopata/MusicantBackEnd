@@ -41,7 +41,7 @@ namespace MusicantBackEnd.Controllers
 
             if (!result.Succeeded)
             {
-                return BadRequest(result.Errors);
+                return BadRequest("Подсигурете се, че имейлът е форматиран правилно, а паролата съдържа: главна буква, цифра и символ.");
             }
 
             var token = await _tokenService.GenerateToken(user);
@@ -60,13 +60,21 @@ namespace MusicantBackEnd.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                return BadRequest("Невалидни данни.");
             }
 
             var user = await _userManager.FindByEmailAsync(model.Email);
-            if (user == null || !await _userManager.CheckPasswordAsync(user, model.Password))
+            if (user.IsLocked)
             {
-                return Unauthorized();
+                return Unauthorized("Този акаунт е заключен от администратор.");
+            }
+            if (user == null)
+            {
+                return Unauthorized("Този имейл не е регистриран.");
+            }
+            if (!await _userManager.CheckPasswordAsync(user, model.Password))
+            {
+                return Unauthorized("Грешна парола");
             }
 
             var token = await _tokenService.GenerateToken(user);
