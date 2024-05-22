@@ -35,20 +35,6 @@ namespace MusicantBackEnd.Controllers
 
             return Ok(userName);
         }
-        [HttpGet("getRecentFans")]
-        public async Task<IActionResult> GetRecentFans()
-        {
-            var user = await _userManager.GetUserAsync(User);
-            if (user == null) { return BadRequest(); }
-
-            List<AppUser?> recentFans = await _db.Follows.Where(f => f.FollowedId == user.Id)
-                .TakeLast(5)
-                .Include(f => f.Follower)
-                .Select(f => f.Follower)
-                .ToListAsync();
-
-            return new JsonResult(new {recentFans});
-        }
         [HttpPost("follow")]
         public async Task<IActionResult> Follow(int otherUserId)
         {
